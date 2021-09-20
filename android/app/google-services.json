@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "666778495589",
+    "project_id": "todquest-assignment",
+    "storage_bucket": "todquest-assignment.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666778495589:android:a4031a8a0d2c163fea748c",
+        "android_client_info": {
+          "package_name": "com.arpit.todquest_assignment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666778495589-53uhk6nf920plet8uv8rb5vg9dofe28q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.arpit.todquest_assignment",
+            "certificate_hash": "fe051bd26cde5ba6a13aca87877a6464ba0c5abc"
+          }
+        },
+        {
+          "client_id": "666778495589-1t22usulek79av7eqnu2ecmqnmdffqeh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWzKazEXji73jl0tBkLJLJAf06BHaCGtg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666778495589-1t22usulek79av7eqnu2ecmqnmdffqeh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
