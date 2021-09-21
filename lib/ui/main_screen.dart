@@ -1,16 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todquest_assignment/controllers/controller.dart';
-import 'package:todquest_assignment/utilities/routes.dart';
+import 'package:todquest_assignment/helper/screens.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key key}) : super(key: key);
+class MainScreen extends StatefulWidget {
+  const MainScreen({Key key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _MainScreenState createState() => _MainScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _MainScreenState extends State<MainScreen> {
   
   Controller controller;
 
@@ -25,26 +25,18 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Colors.blue,
       title: Text(
-        'Todquest',
+        'Todquest Assignment APP',
       ),
-      actions: [
-        IconButton(
-          icon: Icon(
-            Icons.logout,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            controller.logOut();
-          },
-        )
-      ],
     ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           _buildUIBtn(),
+          SizedBox(height: 20,),
           _buildPathBtn(),
+          SizedBox(height: 20,),
           _buildUserListBtn(),
         ],
       ),
@@ -58,18 +50,15 @@ class _HomeScreenState extends State<HomeScreen> {
         width: double.infinity,
         child: ElevatedButton(
           onPressed: () {
-              Navigator.pushNamed(context, Routes.ui);
+              Navigator.pushNamed(context, Screens.card);
           },
           style: ElevatedButton.styleFrom(
               padding:
               EdgeInsets.only(top: 12, left: 30, right: 30, bottom: 12),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-              ),
-              primary: Colors.black,
+              primary: Colors.blue,
               elevation: 5.0),
           child: Text(
-            'Display UI of Button',
+            'Card ASSIGNMENT',
             style: TextStyle(
               color: Colors.white,
               letterSpacing: 1.5,
@@ -86,18 +75,15 @@ class _HomeScreenState extends State<HomeScreen> {
         width: double.infinity,
         child: ElevatedButton(
           onPressed: (){
-            Navigator.pushNamed(context, Routes.path);
+            Navigator.pushNamed(context, Screens.path);
           },
           style: ElevatedButton.styleFrom(
               padding:
               EdgeInsets.only(top: 12, left: 30, right: 30, bottom: 12),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-              ),
-              primary: Colors.black,
+              primary: Colors.blue,
               elevation: 5.0),
           child: Text(
-            'Print Path Of Directory',
+            'Path ASSIGNMENT',
             style: TextStyle(
               color: Colors.white,
               letterSpacing: 1.5,
@@ -114,18 +100,15 @@ class _HomeScreenState extends State<HomeScreen> {
         width: double.infinity,
         child: ElevatedButton(
           onPressed: (){
-            Navigator.pushNamed(context, Routes.userList);
+            Navigator.pushNamed(context, Screens.users);
           },
           style: ElevatedButton.styleFrom(
               padding:
               EdgeInsets.only(top: 12, left: 30, right: 30, bottom: 12),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-              ),
-              primary: Colors.black,
+              primary: Colors.blue,
               elevation: 5.0),
           child: Text(
-            'Print User List',
+            'User Details ASSIGNMENT',
             style: TextStyle(
               color: Colors.white,
               letterSpacing: 1.5,

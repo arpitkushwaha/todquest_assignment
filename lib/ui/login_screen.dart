@@ -3,18 +3,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todquest_assignment/controllers/controller.dart';
-import 'package:todquest_assignment/models/user_model.dart';
-import 'package:todquest_assignment/utilities/constants.dart';
-import 'package:todquest_assignment/utilities/routes.dart';
+import 'package:todquest_assignment/models/user.dart';
+import 'package:todquest_assignment/helper/commons.dart';
+import 'package:todquest_assignment/helper/screens.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key key}) : super(key: key);
 
   @override
-  _RegisterScreenState createState() => _RegisterScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _LoginScreenState extends State<LoginScreen> {
 
   final _formKey = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
@@ -28,7 +28,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     // TODO: implement initState
     super.initState();
     controller = Controller(buildContext: context);
-    listenToAuthChanges();
   }
 
   @override
@@ -43,9 +42,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _buildTextField("Enter Name", nameController),
-                  _buildTextField("Enter Email", emailController),
-                  _buildRegisterBtn(),
+                  _buildTextField("Enter your full name", nameController),
+                  SizedBox(height: 30,),
+                  _buildTextField("Enter your email", emailController),
+                  SizedBox(height: 60,),
+                  _buildLoginBtn(),
                 ],
               ),
             )),
@@ -70,45 +71,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
           borderRadius: BorderRadius.circular(15.0),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.black, width: 1.0),
+          borderSide: const BorderSide(color: Colors.blue, width: 1.0),
           borderRadius: BorderRadius.circular(15.0),
         ),
         filled: true,
-        hintStyle: TextStyle(color: Colors.grey[800]),
+        hintStyle: TextStyle(color: Colors.black),
         hintText: title,
         fillColor: Colors.white70,
       ),
     );
   }
 
-  Widget _buildRegisterBtn() {
+  Widget _buildLoginBtn() {
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 25.0),
         width: double.infinity,
         child: ElevatedButton(
           onPressed: () async{
             if (_formKey.currentState.validate()) {
-              Constants.userCredentials = await auth.signInAnonymously();
-              controller.addRecordInDb(
+              Commons.userCredential = await auth.signInAnonymously();
+              controller.createUser(
                   users,
-                  UserModel(
+                  UserM(
                       timestamp: DateTime.now().toString(),
                       name: nameController.text,
                   email: emailController.text));
 
-              Navigator.pushNamed(context, Routes.home);
+              Navigator.pushNamed(context, Screens.main);
             }
           },
           style: ElevatedButton.styleFrom(
               padding:
               EdgeInsets.only(top: 12, left: 30, right: 30, bottom: 12),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-              ),
-              primary: Colors.black,
+              primary: Colors.blue,
               elevation: 5.0),
           child: Text(
-            'REGISTER',
+            'LOGIN',
             style: TextStyle(
               color: Colors.white,
               letterSpacing: 1.5,
@@ -119,13 +117,4 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ));
   }
 
-  listenToAuthChanges() {
-    FirebaseAuth.instance.authStateChanges().listen((User user) {
-      if (user == null) {
-        print('Logged Out');
-      } else {
-        print('Logged In!');
-      }
-    });
-  }
 }

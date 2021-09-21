@@ -3,14 +3,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:todquest_assignment/controllers/controller.dart';
 
-class UserListScreen extends StatefulWidget {
-  const UserListScreen({Key key}) : super(key: key);
+class UsersScreen extends StatefulWidget {
+  const UsersScreen({Key key}) : super(key: key);
 
   @override
-  _UserListScreenState createState() => _UserListScreenState();
+  _UsersScreenState createState() => _UsersScreenState();
 }
 
-class _UserListScreenState extends State<UserListScreen> {
+class _UsersScreenState extends State<UsersScreen> {
   TextEditingController weightTextCon = TextEditingController();
   TextEditingController editWeightTextCon = TextEditingController();
   String weight;
@@ -32,6 +32,12 @@ class _UserListScreenState extends State<UserListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        title: Text(
+          'User Details Assignment',
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -49,52 +55,44 @@ class _UserListScreenState extends State<UserListScreen> {
                 }
 
                 if (snapshot.hasData) {
-                  List<Map<String, dynamic>> listOfUserData =
-                  new List<Map<String, dynamic>>();
+                  List<Map<String, dynamic>> userList = [];
                   snapshot.data.docs.forEach((document) {
-                    listOfUserData.add(document.data());
+                    userList.add(document.data());
                   });
 
                   return ListView.separated(
                       separatorBuilder: (context, index) => Divider(),
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: listOfUserData.length,
+                      itemCount: userList.length,
                       itemBuilder: (BuildContext context, int index) {
                         print(
-                            "key: :${listOfUserData[index]["name"]} ${listOfUserData[index]["email"]} ${listOfUserData[index]["timestamp"]}");
-                        return ListTile(
-                          title: Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                        'Email: ${listOfUserData[index]["email"]}'),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                        'Name: ${listOfUserData[index]["name"]}'),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                        "${listOfUserData[index]["timestamp"]}"),
-                                  ],
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                ),
-                              ],
+                            "key: :${userList[index]["name"]} ${userList[index]["email"]} ${userList[index]["timestamp"]}");
+                        return Padding(
+                          padding: EdgeInsets.only(left: 18, right: 18),
+                          child: Card(
+                            elevation: 5,
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("USER DETAILS", style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15
+                                  ),),
+                                  Text(
+                                      '${userList[index]["email"]}'),
+                                  Text(
+                                      '${userList[index]["name"]}'),
+                                ],
+                              ),
                             ),
+                            //title: Text(
+                            //  "${keys[index].toString()} - ${data[keys[index].toString()].toString()}") //: ${value.values.first.toString()}"),
+                            //subtitle: Text(value.toString()),
                           ),
-                          //title: Text(
-                          //  "${keys[index].toString()} - ${data[keys[index].toString()].toString()}") //: ${value.values.first.toString()}"),
-                          //subtitle: Text(value.toString()),
                         );
                       });
                 }
