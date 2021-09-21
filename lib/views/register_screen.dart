@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todquest_assignment/controllers/controller.dart';
+import 'package:todquest_assignment/models/user_model.dart';
 import 'package:todquest_assignment/utilities/constants.dart';
 import 'package:todquest_assignment/utilities/routes.dart';
 
@@ -17,11 +20,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   FirebaseAuth auth = FirebaseAuth.instance;
+  Controller controller;
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    controller = Controller(buildContext: context);
     listenToAuthChanges();
   }
 
@@ -51,7 +57,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget _buildTextField(
       String title, TextEditingController textEditingController) {
     return TextFormField(
-      keyboardType: TextInputType.number,
       controller: textEditingController,
       validator: (value) {
         if (value.isEmpty) {
@@ -84,6 +89,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
           onPressed: () async{
             if (_formKey.currentState.validate()) {
               Constants.userCredentials = await auth.signInAnonymously();
+              controller.addRecordInDb(
+                  users,
+                  UserModel(
+                      timestamp: DateTime.now().toString(),
+                      name: nameController.text,
+                  email: emailController.text));
+
               Navigator.pushNamed(context, Routes.home);
             }
           },

@@ -24,7 +24,6 @@ class Controller {
   Future<void> addRecordInDb(
       CollectionReference users, UserModel user) {
     users
-        .doc(Constants.userCredentials.user.uid)
-        .set({"name": user.name, "email": user.email, "timestamp": user.timestamp}, SetOptions(merge: true));
+        .add({"name": user.name, "email": user.email, "timestamp": user.timestamp});
   }
 }
