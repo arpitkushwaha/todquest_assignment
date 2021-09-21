@@ -23,115 +23,121 @@ class _UiScreenState extends State<UiScreen> {
       child: Center(
           child: Padding(
         padding: const EdgeInsets.all(15.0),
-        child: Stack(
-          children : [
-            SizedBox(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: Material(
+        child: SizedBox(
+        height: MediaQuery.of(context).size.height-400,
+        width: MediaQuery.of(context).size.width-80,
+        child: Material(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(150),
+            topLeft: Radius.circular(20),
+            bottomLeft: Radius.circular(20),
+            bottomRight: Radius.circular(20),
+          ),
+          elevation: 5,
+          child: Container(
+            decoration: BoxDecoration(
+              color:Colors.deepOrangeAccent[100],
               borderRadius: BorderRadius.only(
-                topRight: Radius.circular(90),
+                topRight: Radius.circular(150),
+                topLeft: Radius.circular(20),
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
               ),
-              elevation: 5,
-              child: Container(
-                decoration: BoxDecoration(
-                  color:Colors.deepOrangeAccent[100],
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(90),
-                  ),
-                  border: Border.all(
-                    color: Colors.deepOrangeAccent[100],
-                    style: BorderStyle.solid,
+              border: Border.all(
+                color: Colors.deepOrangeAccent[100],
+                style: BorderStyle.solid,
+              ),
+            ),
+            child: Stack(
+              children: [
+                Align(
+                    alignment: Alignment.topLeft,
+                    child: Image.asset('assets/images/bread.png', width: 150,height: 150,)),
+                Align(
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Breakfast",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 40,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Text(
+                        "Bread,",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "PeanutButter,",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Apple,",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                    ],
                   ),
                 ),
-              ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Text(
+                          "525",
+                          style: TextStyle(
+                              fontSize: 50,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 25,
+                      ),
+                      Text(
+                        "kcal",
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
-            Align(
-              alignment: Alignment.topLeft,
-                child: Image.asset('assets/images/bread.png', width: 200,height: 200,)),
-            Align(
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Breakfast",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontSize: 40,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    "Bread,",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "PeanutButter,",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Apple,",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                ],
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Text(
-                      "525",
-                      style: TextStyle(
-                        fontSize: 50,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 25,
-                  ),
-                  Text(
-                    "kcal",
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            )
-        ]
         ),
+          ),
       )),
     ));
   }
